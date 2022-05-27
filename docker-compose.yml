@@ -1,0 +1,39 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: crm
+      MYSQL_USER: mysqluser
+      MYSQL_PASSWORD: mysqlpassword
+      MYSQL_ROOT_PASSWORD: mysqlrootpassword
+    healthcheck:
+      test: mysqladmin ping --password=mysqlrootpassword
+      interval: 10s
+      timeout: 2s
+      retries: 10
+
+  # payment-api:
+  #   container_name: payment-api
+  #   build: .
+  #   tty: true
+  #   ports:
+  #     - '3000:3000'
+  #   environment:
+  #     LOG_LEVEL: debug
+  #     DB_HOST: mysql
+  #     DB_DATABASE: toca_payments
+  #     DB_USERNAME: mysqluser
+  #     DB_PASSWORD: mysqlpassword
+  #     DEBUG: 'sequelize:*'
+  #     EMAIL_CONTENT_TABLE: email_content
+  #   volumes:
+  #     - ./:/app
+  #   command: sh -c ' npx sls config credentials --overwrite --provider aws --key KEY --secret SECRET && npm run setup:mysql && npm run start:local'
+  #   depends_on:
+  #     mysql:
+  #       condition: service_healthy
