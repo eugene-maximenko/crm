@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/eugene-maximenko/crm/issues"
   },
-  "homepage": "https://github.com/eugene-maximenko/crm#readme"
+  "homepage": "https://github.com/eugene-maximenko/crm#readme",
+  "dependencies": {
+    "tsc": "^2.0.4"
+  }
 }
