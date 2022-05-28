@@ -17,23 +17,22 @@ services:
       timeout: 2s
       retries: 10
 
-  # payment-api:
-  #   container_name: payment-api
-  #   build: .
-  #   tty: true
-  #   ports:
-  #     - '3000:3000'
-  #   environment:
-  #     LOG_LEVEL: debug
-  #     DB_HOST: mysql
-  #     DB_DATABASE: toca_payments
-  #     DB_USERNAME: mysqluser
-  #     DB_PASSWORD: mysqlpassword
-  #     DEBUG: 'sequelize:*'
-  #     EMAIL_CONTENT_TABLE: email_content
-  #   volumes:
-  #     - ./:/app
-  #   command: sh -c ' npx sls config credentials --overwrite --provider aws --key KEY --secret SECRET && npm run setup:mysql && npm run start:local'
-  #   depends_on:
-  #     mysql:
-  #       condition: service_healthy
+  express:
+    container_name: express
+    build: .
+    tty: true
+    ports:
+      - '3000:3000'
+    environment:
+      LOG_LEVEL: debug
+      DB_HOST: mysql
+      DB_DATABASE: crm
+      DB_USERNAME: mysqluser
+      DB_PASSWORD: mysqlpassword
+      DEBUG: 'sequelize:*'
+    volumes:
+      - ./:/app
+    command: sh -c 'npm start'
+    depends_on:
+      mysql:
+        condition: service_healthy
