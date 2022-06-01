@@ -22,7 +22,7 @@ services:
     build: .
     tty: true
     ports:
-      - '3000:3000'
+      - '5000:5000'
     environment:
       LOG_LEVEL: debug
       DB_HOST: mysql
@@ -32,7 +32,7 @@ services:
       DEBUG: 'sequelize:*'
     volumes:
       - ./:/app
-    command: sh -c 'npm start'
+    command: sh -c 'npm run dev'
     depends_on:
       mysql:
         condition: service_healthy
